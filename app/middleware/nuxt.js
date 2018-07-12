@@ -17,6 +17,7 @@ module.exports = (options, app) => {
       return await next();
     }
     ctx.status = 200;
+    ctx.req.session = ctx.session;
     const { res, req } = ctx;
     return new Promise((resolve, reject) => {
       ctx.res.on("close", resolve);

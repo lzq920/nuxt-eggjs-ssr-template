@@ -8,6 +8,8 @@ module.exports = appInfo => {
 
   // add your config here
   config.middleware = ["nuxt"];
-
+  config.security = {
+    csrf: false
+  };
   return config;
 };

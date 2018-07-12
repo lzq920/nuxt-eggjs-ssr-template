@@ -3,8 +3,12 @@
 const Controller = require("egg").Controller;
 
 class HomeController extends Controller {
-  async index() {
-    this.ctx.body = "hi, egg";
+  async login() {
+    let data = this.ctx.request.body;
+    if (data) {
+      this.ctx.session.token = data.token;
+      this.ctx.body = data;
+    }
   }
 }
 

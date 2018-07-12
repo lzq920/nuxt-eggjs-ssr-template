@@ -9,6 +9,8 @@
     "egg": "^2.2.1",
     "egg-scripts": "^2.5.0",
     "element-ui": "^2.4.3",
+    "material-design-icons": "^3.0.1",
+    "normalize.css": "^8.0.0",
     "nuxt": "^1.4.1"
   },
   "devDependencies": {
