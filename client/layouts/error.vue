@@ -5,9 +5,9 @@
     </div>
     <div class="status">
       <h1 class="animated infinite bounce">{{error.statusCode}}</h1>
-      <nuxt-link to="/">
-        <el-button type="primary">返回首页</el-button>
-      </nuxt-link>
+      <p>{{error.message}}</p>
+      <el-button type="primary" @click="toIndex">返回首页</el-button>
+      <el-button type="primary" @click="toBack">返回上一页</el-button>
     </div>
   </div>
 </template>
@@ -20,7 +20,15 @@ export default {
     }
   },
   layout: "page",
-  props: ["error"]
+  props: ["error"],
+  methods: {
+    toIndex() {
+      this.$router.push("/");
+    },
+    toBack() {
+      this.$router.back();
+    }
+  }
 }
 </script>
 

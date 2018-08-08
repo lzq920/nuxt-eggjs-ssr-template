@@ -4,20 +4,20 @@ Vue.use(Vuex);
 const store = () =>
   new Vuex.Store({
     state: {
-      token: null
+      userinfo: {}
     },
     mutations: {
       login(state, data) {
-        state.token = data;
+        state.userinfo = data;
       },
       logout(state) {
-        state.token = null;
+        state.userinfo = {};
       }
     },
     actions: {
       nuxtServerInit({ commit }, { req }) {
-        if (req.session && req.session.token) {
-          commit("login", req.session.token);
+        if (req.session && req.session.user) {
+          commit("login", req.session.user);
         }
       }
     }

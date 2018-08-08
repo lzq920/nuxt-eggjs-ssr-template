@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nuxt-link to="/">About</nuxt-link>
+    log
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   head() {
     return {
-      title: "about"
+      title: "操作日志"
     }
   }
 }

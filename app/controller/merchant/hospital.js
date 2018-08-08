@@ -2,36 +2,25 @@
 
 const Controller = require("egg").Controller;
 
-class HomeController extends Controller {
-  async login() {
+class HospitalController extends Controller {
+  async list() {
     let data = this.ctx.request.body;
     let result = await this.service.fetch.post(
-      this.config.api.login,
+      this.config.api.hospital_list,
       "POST",
       data
     );
     if (result.status === 200) {
       this.ctx.body = result.data;
-      this.ctx.session.user = result.data;
     } else {
       this.ctx.body = result.data;
       this.ctx.status = result.status;
     }
   }
-  async logout() {
+  async detail() {
     let data = this.ctx.request.body;
     let result = await this.service.fetch.post(
-      this.config.api.logout,
-      "POST",
-      data
-    );
-    this.ctx.session = null;
-    this.ctx.body = result.data;
-  }
-  async info() {
-    let data = this.ctx.request.body;
-    let result = await this.service.fetch.post(
-      this.config.api.index,
+      this.config.api.hospital_detail,
       "POST",
       data
     );
@@ -44,4 +33,4 @@ class HomeController extends Controller {
   }
 }
 
-module.exports = HomeController;
+module.exports = HospitalController;

@@ -3,11 +3,11 @@ module.exports = {
   css: [
     "normalize.css/normalize.css",
     "animate.css/animate.min.css",
-    "material-design-icons/iconfont/material-icons.css",
-    "element-ui/lib/theme-chalk/index.css"
+    "element-ui/lib/theme-chalk/index.css",
+    "font-awesome/css/font-awesome.min.css"
   ],
   head: {
-    titleTemplate: "%s - Eggjs-Nuxt-SSR",
+    titleTemplate: "%s - 后台管理",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -31,8 +31,19 @@ module.exports = {
       ssr: true
     }
   ],
-  router: {},
+  router: {
+    scrollBehavior: function(to, from, savedPosition) {
+      return { x: 0, y: 0 };
+    }
+  },
   build: {
-    vendor: ["axios", "~/plugins/element.js"]
+    analyze: true,
+    vendor: [
+      "axios",
+      "moment",
+      "~/util/axios.js",
+      "~/plugins/element.js",
+      "~/util/citydata.js"
+    ]
   }
 };

@@ -3,40 +3,32 @@
     <el-container id="container">
       <el-aside :width="isCollapse?'65px':'200px'">
         <div class="header-site" @click="SwitchBar">
-          <i class="material-icons">
-            polymer
-          </i>
+          <i class="fa fa-tripadvisor fa-2x" aria-hidden="true"></i>
         </div>
         <navbar @open="handleOpen" @close="handleClose" :isCollapse="isCollapse"></navbar>
       </el-aside>
       <el-container>
-        <el-header>
-          <div @click="SwitchFullScreen" style="margin-right:20px;cursor:pointer">
-            <i class="material-icons">
-              {{isFullScreen?'fullscreen_exit':'fullscreen'}}
-            </i>
-          </div>
-          <el-dropdown style="cursor:pointer">
+        <!-- <el-header>
+          <el-dropdown>
             <span class="el-dropdown-link">
-              <i class="material-icons">
-                settings
-              </i>
+              {{$store.state.userinfo.Name}}
+              <i class="fa fa-wrench fa-lg" aria-hidden="true"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>个人信息</el-dropdown-item>
+              <el-dropdown-menu>修改密码</el-dropdown-menu>
               <el-dropdown-item>
                 <span @click="logout">退出登录</span>
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-        </el-header>
+        </el-header> -->
         <el-main>
           <nuxt/>
         </el-main>
-        <el-footer>
-          Powered by
-          <a href="https://github.com/lzq920/nuxt-eggjs-ssr-template">nuxt-eggjs-ssr-template</a>
-        </el-footer>
+        <!-- <el-footer>
+          All Rights Reserved
+        </el-footer> -->
       </el-container>
     </el-container>
   </div>
@@ -44,6 +36,7 @@
 
 <script>
 import navbar from "~/components/navbar.vue";
+import axios from 'axios';
 export default {
   middleware: "auth",
   components: {
@@ -51,50 +44,26 @@ export default {
   },
   data() {
     return {
-      isCollapse: false,
-      msgNumber: 12,
-      isFullScreen: false
+      isCollapse: false
     };
   },
   methods: {
     handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
     SwitchBar() {
       this.isCollapse = !this.isCollapse;
     },
-    SwitchFullScreen() {
-      let element = document.documentElement;
-      if (this.isFullScreen) {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitCancelFullScreen) {
-          document.webkitCancelFullScreen();
-        } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
-        }
-      } else {
-        if (element.requestFullscreen) {
-          element.requestFullscreen();
-        } else if (element.webkitRequestFullScreen) {
-          element.webkitRequestFullScreen();
-        } else if (element.mozRequestFullScreen) {
-          element.mozRequestFullScreen();
-        } else if (element.msRequestFullscreen) {
-          // IE11
-          element.msRequestFullscreen();
-        }
-      }
-      this.isFullScreen = !this.isFullScreen;
-    },
     logout() {
-      this.$store.commit("logout");
-      this.$router.push("/login");
+      axios.post("/api/logout").then(res => {
+        this.$store.commit("logout");
+        this.$router.push("/login");
+      }).catch(err => {
+        this.$message.error(err);
+      })
     }
   }
 };
@@ -106,13 +75,15 @@ export default {
   background-color: #f3f9fb;
 }
 .el-aside {
-  background-color: #001529;
+  /* background-color: #001529; */
+  background: #ffffff;
   transition: width 0.5s;
 }
 .header-site {
   height: 60px;
   display: flex;
   justify-content: center;
+  background: #001529;
   align-items: center;
   color: #ffffff;
 }

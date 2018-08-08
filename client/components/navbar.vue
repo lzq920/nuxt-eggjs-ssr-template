@@ -1,23 +1,20 @@
 <template>
   <div>
     <el-scrollbar>
-      <el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" background-color="#001529" text-color="#fff" active-text-color="#2a76f3" :collapse="isCollapse" router>
+      <el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse" router>
         <el-menu-item index="/">
           <template>
-            <i class="material-icons icon">
-              account_balance
-            </i>
+            <i class="fa fa-h-square fa-lg">&nbsp;&nbsp;</i>
             <span slot="title">主页</span>
           </template>
         </el-menu-item>
-        <el-submenu index="/">
+        <el-submenu index="/merchant">
           <template slot="title">
-            <i class="material-icons icon">
-              view_list
-            </i>
-            <span>关于</span>
+            <i class="fa fa-hospital-o fa-lg">&nbsp;&nbsp;</i>
+            <span>商户中心</span>
           </template>
-          <el-menu-item index="/about">关于</el-menu-item>
+          <el-menu-item index="/merchant/hospital/">医院管理</el-menu-item>
+          <el-menu-item index="/merchant/doctor/">医生管理</el-menu-item>
         </el-submenu>
       </el-menu>
     </el-scrollbar>
@@ -41,7 +38,4 @@ export default {
 </script>
 
 <style>
-.icon {
-  margin-right: 10px;
-}
 </style>

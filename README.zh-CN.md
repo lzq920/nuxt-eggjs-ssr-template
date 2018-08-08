@@ -1,7 +1,5 @@
 # nuxt
 
-
-
 ## 快速入门
 
 <!-- 在此次添加使用文档 -->
@@ -19,8 +17,9 @@ $ open http://localhost:7001/
 ### 部署
 
 ```bash
-$ npm start
-$ npm stop
+$ npm run build
+$ npm run start
+$ npm run stop
 ```
 
 ### 单元测试
@@ -34,6 +33,5 @@ $ npm stop
 - 使用 `npm run lint` 来做代码风格检查。
 - 使用 `npm test` 来执行单元测试。
 - 使用 `npm run autod` 来自动检测依赖更新，详细参见 [autod](https://www.npmjs.com/package/autod) 。
-
 
 [egg]: https://eggjs.org

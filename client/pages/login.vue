@@ -2,11 +2,11 @@
   <div class="page-container">
     <div class="login-container">
       <el-form :model="user" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm" :status-icon="true">
-        <el-form-item prop="username">
-          <el-input v-model="user.username" prefix-icon="fa fa-user" placeholder="用户名"></el-input>
+        <el-form-item prop="Phone">
+          <el-input v-model="user.Phone" prefix-icon="fa fa-user" placeholder="用户名"></el-input>
         </el-form-item>
-        <el-form-item prop="password">
-          <el-input v-model="user.password" type="password" prefix-icon="fa fa-lock" placeholder="密码"></el-input>
+        <el-form-item prop="Password">
+          <el-input v-model="user.Password" type="password" prefix-icon="fa fa-lock" placeholder="密码"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')" style="width:100%">立即登录</el-button>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '~/util/axios';
 export default {
   layout: "page",
   head() {
@@ -28,15 +28,14 @@ export default {
   data() {
     return {
       user: {
-        username: "",
-        password: "",
-        token: "123"
+        Phone: "",
+        Password: "",
       },
       rules: {
-        username: [
-          { required: true, message: "请输入用户名", trigger: "blur" }
+        Phone: [
+          { required: true, message: "请输入手机号", trigger: "blur" }
         ],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }]
+        Password: [{ required: true, message: "请输入密码", trigger: "blur" }]
       }
     };
   },
@@ -45,13 +44,15 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           axios.post("/api/login", this.user).then(res => {
-            this.$store.commit("login", res.data.token);
+            this.$store.commit("login", res.data);
             this.$message.success("登录成功");
             if (this.$route.query.redirect) {
               this.$router.push(this.$route.query.redirect);
             } else {
               this.$router.push("/");
             }
+          }).catch(error => {
+            this.$message.error(error.message);
           })
         } else {
           console.log("error submit!!");
