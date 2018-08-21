@@ -29,8 +29,7 @@
 </template>
 
 <script>
-import axios from '~/util/axios';
-import count from 'vue-count-to';
+import count from "vue-count-to";
 export default {
   components: {
     count
@@ -38,7 +37,7 @@ export default {
   head() {
     return {
       title: "首页"
-    }
+    };
   },
   data() {
     return {
@@ -47,21 +46,24 @@ export default {
         SlaveAmount: 0,
         TransferAmount: 0
       }
-    }
+    };
   },
   methods: {
     getInfo() {
-      axios.post("/api/info").then(res => {
-        this.Info = res.data;
-      }).catch(err => {
-        console.log(err.response.statusText);
-      })
+      this.$axios
+        .post("/api/home/info")
+        .then(res => {
+          this.Info = res.data;
+        })
+        .catch(err => {
+          console.log(err.response.statusText);
+        });
     }
   },
   mounted() {
     this.getInfo();
   }
-}
+};
 </script>
 
 <style>

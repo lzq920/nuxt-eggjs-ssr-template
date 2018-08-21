@@ -64,22 +64,17 @@
 </template>
 
 <script>
-import axios from '~/util/axios';
-import citydata from '~/util/citydata';
+import citydata from "~/util/citydata";
 export default {
   head() {
     return {
       title: "详情"
-    }
+    };
   },
   data() {
     return {
-      DetailForm: {
-
-      },
-      rules: {
-
-      },
+      DetailForm: {},
+      rules: {},
       city: [],
       AddressOptions: [],
       citydata: citydata,
@@ -98,19 +93,26 @@ export default {
         { label: "三级丙等", value: 12 },
         { label: "三级其他等级", value: 13 },
         { label: "其他等级", value: 14 }
-      ],
-    }
+      ]
+    };
   },
   methods: {
     getDetail() {
-      axios.post("/api/merchant/hospital/detail", {
-        Id: this.$route.query.Id
-      }).then(res => {
-        this.DetailForm = res.data;
-        this.AddressOptions = [res.data.ProvinceId, res.data.CityId, res.data.AreaId];
-      }).catch(err => {
-        this.$message.error(err.message);
-      })
+      this.$axios
+        .post("/api/merchant/hospital/detail", {
+          Id: this.$route.query.Id
+        })
+        .then(res => {
+          this.DetailForm = res.data;
+          this.AddressOptions = [
+            res.data.ProvinceId,
+            res.data.CityId,
+            res.data.AreaId
+          ];
+        })
+        .catch(err => {
+          this.$message.error(err.message);
+        });
     },
     getAddress() {
       let address = this.city[0] + this.city[1] + this.DetailForm.Address;
@@ -131,29 +133,37 @@ export default {
       this.city = items;
     },
     getGeo(address) {
-      axios.get("https://restapi.amap.com/v3/geocode/geo", {
-        params: {
-          key: "cc7a0788ca7815d001337d625770985d",
-          address: address
-        }
-      }).then(res => {
-        console.log(res);
-        this.$notify({
-          title: '地址解析',
-          dangerouslyUseHTMLString: true,
-          duration: 0,
-          message: '<p>解析结果:' + res.data.geocodes[0].formatted_address + '</p><p>坐标:' + res.data.geocodes[0].location + '</p>'
+      axios
+        .get("https://restapi.amap.com/v3/geocode/geo", {
+          params: {
+            key: "cc7a0788ca7815d001337d625770985d",
+            address: address
+          }
+        })
+        .then(res => {
+          console.log(res);
+          this.$notify({
+            title: "地址解析",
+            dangerouslyUseHTMLString: true,
+            duration: 0,
+            message:
+              "<p>解析结果:" +
+              res.data.geocodes[0].formatted_address +
+              "</p><p>坐标:" +
+              res.data.geocodes[0].location +
+              "</p>"
+          });
+        })
+        .catch(error => {
+          console.log(error);
         });
-      }).catch(error => {
-        console.log(error);
-      })
     },
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(valid => {
         if (valid) {
-          alert('submit!');
+          alert("submit!");
         } else {
-          console.log('error submit!!');
+          console.log("error submit!!");
           return false;
         }
       });
@@ -165,7 +175,7 @@ export default {
   mounted() {
     this.getDetail();
   }
-}
+};
 </script>
 
 <style>

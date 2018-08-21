@@ -1,5 +1,7 @@
 import axios from "axios";
-const instance = axios.create();
+const instance = axios.create({
+  baseURL: "http://127.0.0.1:7001/"
+});
 instance.interceptors.request.use(
   function(config) {
     return config;
@@ -17,7 +19,7 @@ instance.interceptors.response.use(
     switch (error.response.status) {
       case 401:
         errorType = { status: 401, message: "用户未登录" };
-        location.replace("/login?redirect=" + location.pathname);
+        location.href = "/login?redirect=" + location.pathname;
         break;
       case 500:
         errorType = { status: 500, message: "服务器错误" };

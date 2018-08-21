@@ -8,7 +8,7 @@
         <navbar @open="handleOpen" @close="handleClose" :isCollapse="isCollapse"></navbar>
       </el-aside>
       <el-container>
-        <!-- <el-header>
+        <el-header>
           <el-dropdown>
             <span class="el-dropdown-link">
               {{$store.state.userinfo.Name}}
@@ -22,7 +22,7 @@
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-        </el-header> -->
+        </el-header>
         <el-main>
           <nuxt/>
         </el-main>
@@ -36,7 +36,6 @@
 
 <script>
 import navbar from "~/components/navbar.vue";
-import axios from 'axios';
 export default {
   middleware: "auth",
   components: {
@@ -58,12 +57,15 @@ export default {
       this.isCollapse = !this.isCollapse;
     },
     logout() {
-      axios.post("/api/logout").then(res => {
-        this.$store.commit("logout");
-        this.$router.push("/login");
-      }).catch(err => {
-        this.$message.error(err);
-      })
+      this.$axios
+        .post("/api/home/logout")
+        .then(res => {
+          this.$store.commit("logout");
+          this.$router.push("/login");
+        })
+        .catch(err => {
+          this.$message.error(err);
+        });
     }
   }
 };

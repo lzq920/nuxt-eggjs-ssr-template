@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import axios from '~/util/axios';
 export default {
   layout: "page",
   head() {
@@ -29,12 +28,10 @@ export default {
     return {
       user: {
         Phone: "",
-        Password: "",
+        Password: ""
       },
       rules: {
-        Phone: [
-          { required: true, message: "请输入手机号", trigger: "blur" }
-        ],
+        Phone: [{ required: true, message: "请输入手机号", trigger: "blur" }],
         Password: [{ required: true, message: "请输入密码", trigger: "blur" }]
       }
     };
@@ -43,17 +40,20 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          axios.post("/api/login", this.user).then(res => {
-            this.$store.commit("login", res.data);
-            this.$message.success("登录成功");
-            if (this.$route.query.redirect) {
-              this.$router.push(this.$route.query.redirect);
-            } else {
-              this.$router.push("/");
-            }
-          }).catch(error => {
-            this.$message.error(error.message);
-          })
+          this.$axios
+            .post("/api/home/login", this.user)
+            .then(res => {
+              this.$store.commit("login", res.data);
+              this.$message.success("登录成功");
+              if (this.$route.query.redirect) {
+                this.$router.push(this.$route.query.redirect);
+              } else {
+                this.$router.push("/");
+              }
+            })
+            .catch(error => {
+              this.$message.error(error.message);
+            });
         } else {
           console.log("error submit!!");
           return false;

@@ -116,27 +116,29 @@
 </template>
 
 <script>
-import axios from '~/util/axios';
-import moment from 'moment';
-import citydata from '~/util/citydata.js';
+import moment from "moment";
+import citydata from "~/util/citydata.js";
 export default {
   head() {
     return {
       title: "医院列表"
-    }
+    };
   },
   data() {
     return {
       List: [],
       citydata: citydata,
       AddressOptions: [],
-      VerifyedOptions: [{
-        value: 1,
-        label: "自有"
-      }, {
-        value: 2,
-        label: "共享"
-      }],
+      VerifyedOptions: [
+        {
+          value: 1,
+          label: "自有"
+        },
+        {
+          value: 2,
+          label: "共享"
+        }
+      ],
       StartTime: "",
       EndTime: "",
       search: {
@@ -154,12 +156,12 @@ export default {
         Count: 10,
         TotalPage: 1
       }
-    }
+    };
   },
   methods: {
     searchData() {
-      this.search.StartTime = (this.StartTime / 1000);
-      this.search.EndTime = (this.EndTime / 1000);
+      this.search.StartTime = this.StartTime / 1000;
+      this.search.EndTime = this.EndTime / 1000;
       this.search.ProvinceId = this.AddressOptions[0];
       this.search.CityId = this.AddressOptions[1];
       this.search.AreaId = this.AddressOptions[2];
@@ -167,14 +169,17 @@ export default {
     },
     getList() {
       let params = Object.assign({}, this.page, this.search);
-      axios.post("/api/merchant/hospital/list", params).then(res => {
-        this.List = res.data.Data;
-        this.page.Page = parseInt(res.data.PageInfo.Page);
-        this.page.Count = res.data.PageInfo.Count;
-        this.page.TotalPage = res.data.PageInfo.TotalPage;
-      }).catch(error => {
-        this.$message.error(error.message);
-      });
+      this.$axios
+        .post("/api/merchant/hospital/list", params)
+        .then(res => {
+          this.List = res.data.Data;
+          this.page.Page = parseInt(res.data.PageInfo.Page);
+          this.page.Count = res.data.PageInfo.Count;
+          this.page.TotalPage = res.data.PageInfo.TotalPage;
+        })
+        .catch(error => {
+          this.$message.error(error.message);
+        });
     },
     handleSizeChange(val) {
       this.page.PageSize = val;
@@ -213,7 +218,7 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style>
