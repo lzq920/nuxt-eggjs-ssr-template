@@ -13,7 +13,7 @@
     "font-awesome": "^4.7.0",
     "moment": "^2.22.2",
     "normalize.css": "^8.0.0",
-    "nuxt": "^1.4.1",
+    "nuxt": "^2.3.4",
     "vue-count-to": "^1.0.13"
   },
   "devDependencies": {
@@ -22,8 +22,8 @@
     "egg-bin": "^4.3.5",
     "egg-ci": "^1.8.0",
     "egg-mock": "^3.14.0",
-    "eslint": "^4.11.0",
-    "eslint-config-egg": "^6.0.0",
+    "eslint": "^5.12.1",
+    "eslint-config-egg": "^7.1.0",
     "webstorm-disable-index": "^1.2.0"
   },
   "engines": {
