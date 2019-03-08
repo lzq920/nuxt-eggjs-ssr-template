@@ -9,5 +9,9 @@ module.exports = appInfo => {
   config.security = {
     csrf: false
   };
+  config.mongoose = {
+    url: "mongodb://<username>:<password>@ds255282.mlab.com:55282/wapsite",
+    options: {}
+  };
   return config;
 };

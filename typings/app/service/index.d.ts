@@ -2,10 +2,10 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import ExportNews = require('../../../app/controller/news');
+import ExportNews = require('../../../app/service/news');
 
 declare module 'egg' {
-  interface IController {
+  interface IService {
     news: ExportNews;
   }
 }
