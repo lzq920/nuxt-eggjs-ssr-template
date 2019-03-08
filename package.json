@@ -1,28 +1,21 @@
 {
-  "name": "nuxt",
-  "version": "1.0.0",
-  "description": "",
+  "name": "egg-nuxt-ssr-template",
+  "version": "1.1.0",
+  "description": "egg-nuxt-ssr-template",
   "private": true,
   "dependencies": {
-    "animate.css": "^3.6.1",
     "axios": "^0.18.0",
-    "egg": "^2.2.1",
-    "egg-router-plus": "^1.2.1",
-    "egg-scripts": "^2.5.0",
-    "element-ui": "^2.4.3",
-    "font-awesome": "^4.7.0",
-    "moment": "^2.22.2",
-    "normalize.css": "^8.0.0",
-    "nuxt": "^2.3.4",
-    "vue-count-to": "^1.0.13"
+    "egg": "^2.20.0",
+    "egg-scripts": "^2.11.0",
+    "nuxt": "^2.4.5"
   },
   "devDependencies": {
     "autod": "^3.0.1",
-    "autod-egg": "^1.0.0",
-    "egg-bin": "^4.3.5",
-    "egg-ci": "^1.8.0",
-    "egg-mock": "^3.14.0",
-    "eslint": "^5.12.1",
+    "autod-egg": "^1.1.0",
+    "egg-bin": "^4.11.1",
+    "egg-ci": "^1.11.0",
+    "egg-mock": "^3.21.0",
+    "eslint": "^5.15.1",
     "eslint-config-egg": "^7.1.0",
     "webstorm-disable-index": "^1.2.0"
   },
@@ -43,12 +36,15 @@
     "autod": "autod"
   },
   "ci": {
-    "version": "8"
+    "version": "10"
+  },
+  "egg": {
+    "declarations": true
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:lzq920/nuxt-eggjs-ssr-template.git"
   },
-  "author": "",
+  "author": "lzq920",
   "license": "MIT"
 }
