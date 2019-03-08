@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <p v-for="item in list" :key="item.name">{{item.name}}</p>
-  </div>
+  <div class="index">Hello World!</div>
 </template>
 
 <script>
@@ -16,4 +14,11 @@ export default {
 </script>
 
 <style>
+.index {
+  height: 100vh;
+  font-size: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
