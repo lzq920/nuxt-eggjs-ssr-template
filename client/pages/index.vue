@@ -6,7 +6,7 @@
 import axios from "axios";
 export default {
   asyncData({ params }) {
-    return axios.get("http://127.0.0.1:7001/api/list").then(res => {
+    return axios.get("http://127.0.0.1:7001/api/news/list").then(res => {
       return { list: res.data };
     });
   }
