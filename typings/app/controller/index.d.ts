@@ -1,11 +1,11 @@
-// This file is created by egg-ts-helper
+// This file is created by egg-ts-helper@1.24.1
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import ExportNews = require('../../../app/controller/news');
+import ExportAuth = require('../../../app/controller/auth');
 
 declare module 'egg' {
   interface IController {
-    news: ExportNews;
+    auth: ExportAuth;
   }
 }

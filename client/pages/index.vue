@@ -1,14 +1,25 @@
 <template>
-  <div class="index">Hello World!</div>
+  <div class="index" @click="login">Hello World!</div>
 </template>
 
 <script>
 import axios from "axios";
 export default {
-  asyncData({ params }) {
-    return axios.get("http://127.0.0.1:7001/api/news/list").then(res => {
-      return { list: res.data };
-    });
+  methods: {
+    login() {
+      axios
+        .post("http://127.0.0.1:7001/api/login", {
+          username: "root",
+          password: "123123"
+        })
+        .then(res => {
+          console.log(res);
+          this.$router.push("/about");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 };
 </script>

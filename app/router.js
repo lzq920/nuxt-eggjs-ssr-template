@@ -5,9 +5,7 @@
  */
 module.exports = app => {
   const { router, controller } = app;
-  const auth = app.middleware.auth({
-    size: 10
-  });
-  router.post("/api/news/create", controller.news.create);
-  router.get("/api/news/list", controller.news.list);
+  const auth = app.middleware.auth();
+  router.post("/api/login", controller.auth.login);
+  router.get("/api/info", auth, controller.auth.info);
 };

@@ -1,10 +1,17 @@
 export const state = () => ({
-  counter: 0
+  user: null
 });
 
 export const mutations = {
-  increment(state) {
-    state.counter++;
+  setUser(state, data) {
+    state.user = data;
   }
 };
-export const actions = {};
+export const actions = {
+  nuxtServerInit({ commit }, { req }) {
+    if (req.session.user) {
+      console.log("client", req.session.user);
+      commit("setUser", req.session.user);
+    }
+  }
+};
